@@ -120,7 +120,7 @@
             justify-content: center;
             padding: 10px;
             box-sizing: border-box;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: bold;
             transform: translateY(100%);
             transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -130,8 +130,8 @@
 </head>
 <body>
 
-<audio id="music" loop>
-    <source src="music.mp3" type="audio/mpeg">
+<audio id="music" loop preload="auto">
+    <source src="15._Youm_Talat.mp3" type="audio/mpeg">
 </audio>
 
 <div class="main-card" id="login">
@@ -157,11 +157,11 @@
     <div class="grid">
         <div class="gift-card" onclick="reveal(this)">
             <i>💌</i><span>الأول</span>
-            <div class="msg-overlay">محبتش</div>
+            <div class="msg-overlay">متحبتش</div>
         </div>
         <div class="gift-card" onclick="reveal(this)">
             <i>✨</i><span>الثاني</span>
-            <div class="msg-overlay">ولا بحب</div>
+            <div class="msg-overlay">ولا هحب</div>
         </div>
         <div class="gift-card" onclick="reveal(this)">
             <i>💍</i><span>الثالث</span>
@@ -169,7 +169,7 @@
         </div>
         <div class="gift-card" onclick="reveal(this)">
             <i>👑</i><span>الرابع</span>
-            <div class="msg-overlay">زي ما حبيتك يا احمل حاجه في حياتي❤️💋</div>
+            <div class="msg-overlay">زي ما حبيتك يا اجمل حاجه في حياتي❤️💋</div>
         </div>
     </div>
     <p class="sub-text" style="margin-top: 20px;">(اضغطي على الكروت عشان تفتح)</p>
@@ -182,14 +182,14 @@
     function start() {
         if(document.getElementById('pass').value === P) {
             const song = document.getElementById('music');
-            song.play(); // تشغيل الأغنية
+            song.play().catch(e => console.log("الصوت محتاج تفاعل"));
             
             document.getElementById('login').style.display = 'none';
             document.getElementById('dashboard').style.display = 'block';
             spawnHearts();
             setInterval(update, 1000);
         } else {
-            alert("الباسورد غلط! حاولي تاني يا آية 😉");
+            alert("الباسورد غلط! حاولي تاني");
         }
     }
 
