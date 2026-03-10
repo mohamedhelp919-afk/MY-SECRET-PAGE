@@ -3,19 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>صفحتي السرية</title>
+    <title>مفاجأة خاصة لـ AYA 💖</title>
     <style>
-        body { background-color: #0f172a; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; font-family: sans-serif; }
-        h1 { color: #38bdf8; font-size: 2rem; }
-        .card { background: #1e293b; padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); text-align: center; border: 1px solid #334155; }
-        .heart { color: #f43f5e; font-size: 40px; margin-top: 10px; }
+        body {
+            background-color: #1a1033;
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow-x: hidden;
+        }
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            width: 85%;
+            max-width: 400px;
+        }
+        input {
+            padding: 12px;
+            border-radius: 10px;
+            border: none;
+            width: 85%;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 16px;
+            outline: none;
+        }
+        button {
+            padding: 10px 25px;
+            background-color: #ff2e63;
+            border: none;
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .content { display: none; }
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            margin: 15px 0;
+            padding: 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+            border: 1px dashed #ff2e63;
+        }
+        .card:hover { transform: scale(1.03); background: rgba(255, 255, 255, 0.1); }
+        .hidden-text { display: none; font-weight: bold; color: #ff2e63; margin-top: 10px; font-size: 1.1rem; }
+        #timer { font-size: 1.1rem; color: #00d1ff; margin: 15px 0; font-weight: bold; line-height: 1.6; }
+        .heart-icon { font-size: 40px; margin: 10px; }
     </style>
 </head>
 <body>
-    <div class="card">
-        <h1>أهلاً بك في صفحتي 🤫</h1>
-        <p>هذا الموقع تم إنشاؤه عبر GitHub Pages</p>
-        <div class="heart">❤️</div>
+
+<div class="container" id="login-screen">
+    <div class="heart-icon">🤔</div>
+    <h1>جاهزة؟</h1>
+    <p>كل اللي هنا هيفضل بيني وبينك طول العمر</p>
+    <input type="text" id="password" placeholder="اكتبي الباسورد الخاص بكِ">
+    <br>
+    <button onclick="checkPassword()">إفتحي المفاجأة 😍</button>
+</div>
+
+<div class="container content" id="main-content">
+    <h1>بحبك يا AYA ❤️</h1>
+    <p>أجمل صدفة في عمري</p>
+    
+    <div id="timer">جاري حساب أيامنا...</div>
+    
+    <p style="font-size: 0.9rem; color: #ccc;">(اضغطي على الكروت اللي تحت)</p>
+
+    <div class="card" onclick="showCard(1)">
+        <span>الكارت الأول 💌</span>
+        <p id="c1" class="hidden-text">متحبتش ولا هتحب غيرك والله</p>
     </div>
+
+    <div class="card" onclick="showCard(2)">
+        <span>الكارت الثاني ✨</span>
+        <p id="c2" class="hidden-text">زي ما حبيتك يا أجمل حاجة في حياتي</p>
+    </div>
+
+    <div class="card" onclick="showCard(3)">
+        <span>الكارت الثالث 💍</span>
+        <p id="c3" class="hidden-text">هفضل جنبك ومعاكي لآخر العمر</p>
+    </div>
+</div>
+
+<script>
+    const startDate = new Date(2025, 6, 1); 
+    const secretPass = "1420041712004";
+
+    function checkPassword() {
+        const pass = document.getElementById('password').value;
+        if(pass === secretPass) {
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('main-content').style.display = 'block';
+            startTimer();
+        } else {
+            alert("الباسورد غلط! حاولي تاني يا آية 😉");
+        }
+    }
+
+    function showCard(num) {
+        document.getElementById('c' + num).style.display = 'block';
+    }
+
+    function startTimer() {
+        setInterval(() => {
+            const now = new Date();
+            const diff = now - startDate;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / 1000 / 60) % 60);
+            const seconds = Math.floor((diff / 1000) % 60);
+            if (diff > 0) {
+                document.getElementById('timer').innerHTML = 
+                    `بقالنا ${days} يوم و ${hours} ساعة و ${minutes} دقيقة و ${seconds} ثانية سوا ❤️`;
+            } else {
+                document.getElementById('timer').innerHTML = `لسه مجهزين للمستقبل سوا ❤️`;
+            }
+        }, 1000);
+    }
+</script>
+
 </body>
 </html>
