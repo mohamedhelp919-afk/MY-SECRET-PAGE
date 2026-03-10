@@ -3,134 +3,214 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مفاجأة خاصة لـ AYA 💖</title>
+    <title>إهداء خاص لـ AYA 💖</title>
     <style>
+        :root {
+            --accent: #ff2e63;
+            --glow: #00d1ff;
+            --bg: #05020a;
+        }
+
         body {
-            background-color: #1a1033;
+            background-color: var(--bg);
             color: white;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            margin: 0;
-            overflow-x: hidden;
+            overflow: hidden;
         }
-        .container {
-            text-align: center;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+
+        /* تأثير القلوب المتساقطة */
+        .heart {
+            position: absolute;
+            color: var(--accent);
+            font-size: 15px;
+            pointer-events: none;
+            animation: fall linear forwards;
+            z-index: 10;
+        }
+        @keyframes fall {
+            to { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+
+        .main-card {
             width: 85%;
             max-width: 400px;
-        }
-        input {
-            padding: 12px;
-            border-radius: 10px;
-            border: none;
-            width: 85%;
-            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 40px 20px;
+            backdrop-filter: blur(20px);
             text-align: center;
-            font-size: 16px;
-            outline: none;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+            z-index: 100;
         }
-        button {
-            padding: 10px 25px;
-            background-color: #ff2e63;
-            border: none;
-            color: white;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-        }
-        .content { display: none; }
-        .card {
-            background: rgba(255, 255, 255, 0.05);
-            margin: 15px 0;
-            padding: 20px;
+
+        h1 { font-size: 28px; text-shadow: 0 0 10px var(--accent); margin-bottom: 5px; }
+        .sub-text { font-size: 14px; opacity: 0.6; margin-bottom: 20px; }
+
+        input {
+            width: 80%;
+            padding: 15px;
             border-radius: 15px;
-            cursor: pointer;
-            transition: 0.3s;
-            border: 1px dashed #ff2e63;
+            border: 1px solid var(--accent);
+            background: rgba(0,0,0,0.5);
+            color: white;
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 20px;
+            box-shadow: inset 0 0 10px var(--accent);
         }
-        .card:hover { transform: scale(1.03); background: rgba(255, 255, 255, 0.1); }
-        .hidden-text { display: none; font-weight: bold; color: #ff2e63; margin-top: 10px; font-size: 1.1rem; }
-        #timer { font-size: 1.1rem; color: #00d1ff; margin: 15px 0; font-weight: bold; line-height: 1.6; }
-        .heart-icon { font-size: 40px; margin: 10px; }
+
+        .btn-open {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 12px 40px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 0 20px var(--accent);
+            transition: 0.3s;
+        }
+
+        .content { display: none; animation: fadeIn 1s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* العداد الملون */
+        .timer-container {
+            display: flex;
+            justify-content: space-around;
+            margin: 25px 0;
+        }
+        .timer-box {
+            background: rgba(255,255,255,0.05);
+            padding: 10px;
+            border-radius: 12px;
+            width: 70px;
+            border-bottom: 3px solid var(--glow);
+        }
+        .timer-box span { display: block; font-size: 22px; font-weight: bold; color: var(--glow); }
+        .timer-box small { font-size: 11px; opacity: 0.7; }
+
+        /* الكروت اللي بتفتح */
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 30px; }
+        .gift-card {
+            background: rgba(255,255,255,0.05);
+            padding: 25px 10px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            cursor: pointer;
+            transition: 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+        .gift-card:active { transform: scale(0.95); }
+        .gift-card i { font-size: 30px; display: block; margin-bottom: 10px; }
+        
+        .msg-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(45deg, var(--accent), #ff5e62);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            box-sizing: border-box;
+            font-size: 13px;
+            font-weight: bold;
+            transform: translateY(100%);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .gift-card.revealed .msg-overlay { transform: translateY(0); }
     </style>
 </head>
 <body>
 
-<div class="container" id="login-screen">
-    <div class="heart-icon">🤔</div>
-    <h1>جاهزة؟</h1>
-    <p>كل اللي هنا هيفضل بيني وبينك طول العمر</p>
-    <input type="text" id="password" placeholder="اكتبي الباسورد الخاص بكِ">
+<audio id="music" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<div class="main-card" id="login">
+    <div style="font-size: 50px; margin-bottom: 10px;">🔒</div>
+    <h1>جاهزة يا AYA؟</h1>
+    <p class="sub-text">مكاني السري المخصص ليكي لوحدك</p>
+    <input type="password" id="pass" placeholder="اكتبي الباسورد">
     <br>
-    <button onclick="checkPassword()">إفتحي المفاجأة 😍</button>
+    <button class="btn-open" onclick="start()">فتح المفاجأة ❤️</button>
 </div>
 
-<div class="container content" id="main-content">
-    <h1>بحبك يا AYA ❤️</h1>
-    <p>أجمل صدفة في عمري</p>
-    
-    <div id="timer">جاري حساب أيامنا...</div>
-    
-    <p style="font-size: 0.9rem; color: #ccc;">(اضغطي على الكروت اللي تحت)</p>
+<div class="main-card content" id="dashboard">
+    <h1 style="margin-bottom: 0;">بحبك يا AYA ❤️</h1>
+    <p style="color: var(--glow); font-size: 13px; margin-top: 5px;">أول لقاء: 1/7/2025</p>
 
-    <div class="card" onclick="showCard(1)">
-        <span>الكارت الأول 💌</span>
-        <p id="c1" class="hidden-text">متحبتش ولا هتحب غيرك والله</p>
+    <div class="timer-container">
+        <div class="timer-box"><span id="d">0</span><small>يوم</small></div>
+        <div class="timer-box"><span id="h">0</span><small>ساعة</small></div>
+        <div class="timer-box"><span id="m">0</span><small>دقيقة</small></div>
+        <div class="timer-box"><span id="s">0</span><small>ثانية</small></div>
     </div>
 
-    <div class="card" onclick="showCard(2)">
-        <span>الكارت الثاني ✨</span>
-        <p id="c2" class="hidden-text">زي ما حبيتك يا أجمل حاجة في حياتي</p>
+    <div class="grid">
+        <div class="gift-card" onclick="reveal(this)">
+            <i>💎</i><span>الأول</span>
+            <div class="msg-overlay">متحبتش غيرك والله</div>
+        </div>
+        <div class="gift-card" onclick="reveal(this)">
+            <i>💫</i><span>الثاني</span>
+            <div class="msg-overlay">زي ما حبيتك يا أجمل حاجة</div>
+        </div>
+        <div class="gift-card" onclick="reveal(this)">
+            <i>🧸</i><span>الثالث</span>
+            <div class="msg-overlay">هفضل جنبك ومعاكي للأبد</div>
+        </div>
+        <div class="gift-card" onclick="reveal(this)">
+            <i>👑</i><span>الرابع</span>
+            <div class="msg-overlay">انتي دنيتي كلها يا آية</div>
+        </div>
     </div>
-
-    <div class="card" onclick="showCard(3)">
-        <span>الكارت الثالث 💍</span>
-        <p id="c3" class="hidden-text">هفضل جنبك ومعاكي لآخر العمر</p>
-    </div>
+    <p class="sub-text" style="margin-top: 20px;">(اضغطي على الكروت عشان تفتح)</p>
 </div>
 
 <script>
-    const startDate = new Date(2025, 6, 1); 
-    const secretPass = "1420041712004";
+    const P = "1420041712004";
+    const startD = new Date(2025, 6, 1);
 
-    function checkPassword() {
-        const pass = document.getElementById('password').value;
-        if(pass === secretPass) {
-            document.getElementById('login-screen').style.display = 'none';
-            document.getElementById('main-content').style.display = 'block';
-            startTimer();
+    function start() {
+        if(document.getElementById('pass').value === P) {
+            document.getElementById('music').play();
+            document.getElementById('login').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'block';
+            spawnHearts();
+            setInterval(update, 1000);
         } else {
-            alert("الباسورد غلط! حاولي تاني يا آية 😉");
+            alert("الباسورد مش صح!");
         }
     }
 
-    function showCard(num) {
-        document.getElementById('c' + num).style.display = 'block';
+    function reveal(el) { el.classList.toggle('revealed'); }
+
+    function update() {
+        const diff = new Date() - startD;
+        document.getElementById('d').innerText = Math.floor(diff / 86400000);
+        document.getElementById('h').innerText = Math.floor((diff / 3600000) % 24);
+        document.getElementById('m').innerText = Math.floor((diff / 60000) % 60);
+        document.getElementById('s').innerText = Math.floor((diff / 1000) % 60);
     }
 
-    function startTimer() {
+    function spawnHearts() {
         setInterval(() => {
-            const now = new Date();
-            const diff = now - startDate;
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-            const minutes = Math.floor((diff / 1000 / 60) % 60);
-            const seconds = Math.floor((diff / 1000) % 60);
-            if (diff > 0) {
-                document.getElementById('timer').innerHTML = 
-                    `بقالنا ${days} يوم و ${hours} ساعة و ${minutes} دقيقة و ${seconds} ثانية سوا ❤️`;
-            } else {
-                document.getElementById('timer').innerHTML = `لسه مجهزين للمستقبل سوا ❤️`;
-            }
-        }, 1000);
+            const h = document.createElement('div');
+            h.className = 'heart';
+            h.innerHTML = '❤️';
+            h.style.left = Math.random() * 100 + 'vw';
+            h.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            document.body.appendChild(h);
+            setTimeout(() => h.remove(), 5000);
+        }, 400);
     }
 </script>
 
