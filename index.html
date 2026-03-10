@@ -78,10 +78,10 @@
             transition: 0.3s;
         }
 
-        .content { display: none; animation: fadeIn 1s; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .content { display: none; animation: fadeIn 1.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* العداد الملون */
+        /* العداد */
         .timer-container {
             display: flex;
             justify-content: space-around;
@@ -97,7 +97,7 @@
         .timer-box span { display: block; font-size: 20px; font-weight: bold; color: var(--glow); }
         .timer-box small { font-size: 10px; opacity: 0.7; }
 
-        /* الكروت التفاعلية */
+        /* الكروت */
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 30px; }
         .gift-card {
             background: rgba(255,255,255,0.05);
@@ -131,7 +131,7 @@
 <body>
 
 <audio id="music" loop>
-    <source src="https://www.mboxdrive.com/Amr%20Diab%20-%20Youm%20Talat.mp3" type="audio/mpeg">
+    <source src="music.mp3" type="audio/mpeg">
 </audio>
 
 <div class="main-card" id="login">
@@ -157,19 +157,19 @@
     <div class="grid">
         <div class="gift-card" onclick="reveal(this)">
             <i>💌</i><span>الأول</span>
-            <div class="msg-overlay">متحبتش غيرك والله</div>
+            <div class="msg-overlay">محبتش</div>
         </div>
         <div class="gift-card" onclick="reveal(this)">
             <i>✨</i><span>الثاني</span>
-            <div class="msg-overlay">زي ما حبيتك يا أجمل حاجة</div>
+            <div class="msg-overlay">ولا بحب</div>
         </div>
         <div class="gift-card" onclick="reveal(this)">
             <i>💍</i><span>الثالث</span>
-            <div class="msg-overlay">هفضل جنبك ومعاكي للأبد</div>
+            <div class="msg-overlay">ولا هحب حد</div>
         </div>
         <div class="gift-card" onclick="reveal(this)">
             <i>👑</i><span>الرابع</span>
-            <div class="msg-overlay">انتي دنيتي كلها يا آية</div>
+            <div class="msg-overlay">زي ما حبيتك يا احمل حاجه في حياتي❤️💋</div>
         </div>
     </div>
     <p class="sub-text" style="margin-top: 20px;">(اضغطي على الكروت عشان تفتح)</p>
@@ -181,16 +181,15 @@
 
     function start() {
         if(document.getElementById('pass').value === P) {
-            // تشغيل الموسيقى
             const song = document.getElementById('music');
-            song.play().catch(e => console.log("الصوت محتاج تفاعل"));
+            song.play(); // تشغيل الأغنية
             
             document.getElementById('login').style.display = 'none';
             document.getElementById('dashboard').style.display = 'block';
             spawnHearts();
             setInterval(update, 1000);
         } else {
-            alert("الباسورد غلط! حاولي تاني");
+            alert("الباسورد غلط! حاولي تاني يا آية 😉");
         }
     }
 
