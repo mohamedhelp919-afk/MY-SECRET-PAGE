@@ -81,7 +81,7 @@
         .content { display: none; animation: fadeIn 1s; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* العداد */
+        /* العداد الملون */
         .timer-container {
             display: flex;
             justify-content: space-around;
@@ -97,7 +97,7 @@
         .timer-box span { display: block; font-size: 20px; font-weight: bold; color: var(--glow); }
         .timer-box small { font-size: 10px; opacity: 0.7; }
 
-        /* الكروت */
+        /* الكروت التفاعلية */
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 30px; }
         .gift-card {
             background: rgba(255,255,255,0.05);
@@ -131,7 +131,7 @@
 <body>
 
 <audio id="music" loop>
-    <source src="https://raw.githubusercontent.com/muhammad-help/audio/main/yom-talat.mp3" type="audio/mpeg">
+    <source src="https://www.mboxdrive.com/Amr%20Diab%20-%20Youm%20Talat.mp3" type="audio/mpeg">
 </audio>
 
 <div class="main-card" id="login">
@@ -143,76 +143,4 @@
     <button class="btn-open" onclick="start()">فتح المفاجأة ❤️</button>
 </div>
 
-<div class="main-card content" id="dashboard">
-    <h1 style="margin-bottom: 0;">بحبك يا AYA ❤️</h1>
-    <p style="color: var(--glow); font-size: 13px; margin-top: 5px;">أول لقاء: 1/7/2025</p>
-
-    <div class="timer-container">
-        <div class="timer-box"><span id="d">0</span><small>يوم</small></div>
-        <div class="timer-box"><span id="h">0</span><small>ساعة</small></div>
-        <div class="timer-box"><span id="m">0</span><small>دقيقة</small></div>
-        <div class="timer-box"><span id="s">0</span><small>ثانية</small></div>
-    </div>
-
-    <div class="grid">
-        <div class="gift-card" onclick="reveal(this)">
-            <i>💌</i><span>الأول</span>
-            <div class="msg-overlay">متحبتش غيرك والله</div>
-        </div>
-        <div class="gift-card" onclick="reveal(this)">
-            <i>✨</i><span>الثاني</span>
-            <div class="msg-overlay">زي ما حبيتك يا أجمل حاجة</div>
-        </div>
-        <div class="gift-card" onclick="reveal(this)">
-            <i>💍</i><span>الثالث</span>
-            <div class="msg-overlay">هفضل جنبك ومعاكي للأبد</div>
-        </div>
-        <div class="gift-card" onclick="reveal(this)">
-            <i>👑</i><span>الرابع</span>
-            <div class="msg-overlay">انتي دنيتي كلها يا آية</div>
-        </div>
-    </div>
-    <p class="sub-text" style="margin-top: 20px;">(اضغطي على الكروت عشان تفتح)</p>
-</div>
-
-<script>
-    const P = "1420041712004";
-    const startD = new Date(2025, 6, 1); // 1 يوليو 2025
-
-    function start() {
-        if(document.getElementById('pass').value === P) {
-            document.getElementById('music').play();
-            document.getElementById('login').style.display = 'none';
-            document.getElementById('dashboard').style.display = 'block';
-            spawnHearts();
-            setInterval(update, 1000);
-        } else {
-            alert("الباسورد غلط! حاولي تاني");
-        }
-    }
-
-    function reveal(el) { el.classList.toggle('revealed'); }
-
-    function update() {
-        const diff = new Date() - startD;
-        document.getElementById('d').innerText = Math.floor(diff / 86400000);
-        document.getElementById('h').innerText = Math.floor((diff / 3600000) % 24);
-        document.getElementById('m').innerText = Math.floor((diff / 60000) % 60);
-        document.getElementById('s').innerText = Math.floor((diff / 1000) % 60);
-    }
-
-    function spawnHearts() {
-        setInterval(() => {
-            const h = document.createElement('div');
-            h.className = 'heart';
-            h.innerHTML = '❤️';
-            h.style.left = Math.random() * 100 + 'vw';
-            h.style.animationDuration = (Math.random() * 3 + 2) + 's';
-            document.body.appendChild(h);
-            setTimeout(() => h.remove(), 5000);
-        }, 400);
-    }
-</script>
-
-</body>
-</html>
+<div
