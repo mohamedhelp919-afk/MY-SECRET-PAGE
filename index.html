@@ -177,19 +177,23 @@
 
 <script>
     const P = "1420041712004";
-    const startD = new Date(2025, 6, 1); 
+    const startD = new Date(2025, 6, 1); // تاريخ 1 يوليو 2025
 
     function start() {
         if(document.getElementById('pass').value === P) {
             const song = document.getElementById('music');
-            song.play().catch(e => console.log("الصوت محتاج تفاعل"));
+            
+            // محاولة تشغيل الصوت
+            song.play().catch(function(error) {
+                console.log("التشغيل التلقائي محظور، لكن سيتم التشغيل الآن");
+            });
             
             document.getElementById('login').style.display = 'none';
             document.getElementById('dashboard').style.display = 'block';
             spawnHearts();
             setInterval(update, 1000);
         } else {
-            alert("الباسورد غلط! حاولي تاني");
+            alert("الباسورد غلط! حاولي تاني يا آية 😉");
         }
     }
 
